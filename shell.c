@@ -7,7 +7,7 @@ int parse(char* userInput);
 
 void main(){
 
-	char prompt[100] = {'$','\0'};
+	char prompt[100] = {'$',' ','\0'};
 	char userInput[1000];
 	int errorCode = 0; 
 
@@ -53,5 +53,5 @@ int parse(char ui[]){
 		a++;w++;
 	}
 	 
-	return interpreter(words); 
+	return interpreter(words,w); 
 }

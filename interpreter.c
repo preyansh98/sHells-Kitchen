@@ -2,32 +2,45 @@
 #include <stdlib.h>
 #include <string.h>
 
-int interpreter(char *commands[]); 
-int help(char *commands[]); 
-int quit(char *commands[]); 
-int set(char *commands[]); 
-int print(char *commands[]); 
-int run(char *commands[]); 
+int interpreter(char *commands[], int numargs); 
+int help(char *commands[],int numargs); 
+int quit(char *commands[],int numargs); 
+int set(char *commands[],int numargs); 
+int print(char *commands[],int numargs); 
+int run(char *commands[],int numargs); 
 
-int interpreter(char *commands[]){
+int interpreter(char *commands[], int numargs){
 	
 	int errCode = 0; 
-	 
-	if(strcmp(commands[0], "help") == 0) errCode = help(commands);
-	else if (strcmp(commands[0], "quit") == 0) errCode = quit(commands); 
-	else if (strcmp(commands[0], "set") == 0) errCode = set(commands); 
-	else if (strcmp(commands[0], "print") == 0) errCode = print(commands);
-	else if (strcmp(commands[0], "run") == 0) errCode = run(commands); 
+	
+	if(strcmp(commands[0], "help") == 0) errCode = help(commands, numargs);
+	else if (strcmp(commands[0], "quit") == 0) errCode = quit(commands, numargs); 
+	else if (strcmp(commands[0], "set") == 0) errCode = set(commands, numargs); 
+	else if (strcmp(commands[0], "print") == 0) errCode = print(commands, numargs);
+	else if (strcmp(commands[0], "run") == 0) errCode = run(commands, numargs); 
 	else return 3;
 
 	return errCode; 	
 }
 
-int help(char *commands[]){
-	       
-	return 1;
+int help(char *commands[], int numargs){
+	if(numargs > 1) return 2; 
+
+	printf("COMMAND : DESCRIPTION \n"); 
+ 	printf("help : Displays all the commands \n");
+	printf("quit : Exits / terminates the shell with \"Bye!\" \n"); 
+	printf("set VAR STRING : Assigns a value to the shell memory \n"); 
+	printf("print VAR : Displays the STRING assigned to VAR \n"); 
+	printf("run SCRIPT.TXT : Executes the file SCRIPT.TXT \n"); 	
+	
+	return 0;
 }
-int quit(char *commands[]){return 1; }
-int set (char *commands[]){return 1; }
-int print(char *commands[]){return 1; }
-int run(char *commands[]){return 1; }
+int quit(char *commands[], int numargs){
+	if(numargs > 1) return 2; 
+
+	printf("Bye!\n");
+	exit(0); 
+ }
+int set (char *commands[], int numargs){return 1; }
+int print(char *commands[], int numargs){return 1; }
+int run(char *commands[], int numargs){return 1; }
