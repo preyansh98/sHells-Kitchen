@@ -1,29 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "interpreter.h"
 
-int parseInput(char* userInput); 
+int parse(char* userInput); 
 
 void main(){
 
-	char prompt[100] = {'$', ' ', 's', 'H','E','L','L',' ','\0'};
+	char prompt[100] = {'$','\0'};
 	char userInput[1000];
 	int errorCode = 0; 
 
 	printf("Welcome to the Preyansh shell! \n");
-	printf("Version 1.0 Created January 2020"); 
+	printf("Version 1.0 Created January 2020 \n"); 
 
 	while(1){
 		printf("%s", prompt); 
 		fgets(userInput, 999, stdin);
+		userInput[strlen(userInput) - 1] = '\0';
 
-		errorCode = parseInput(userInput); 
+		errorCode = parse(userInput); 
 		
 		switch(errorCode){
 			case 1: break;
-			case 2: printf("Wrong number of arguments entered!");
+			case 2: printf("Wrong number of arguments entered! \n");
 				break;
-			case 3: printf("Command not recognized!"); 
+			case 3: printf("Unknown command \n"); 
 				break;
 			case -1: exit(99);
 				break;
@@ -32,12 +34,24 @@ void main(){
 	}
 }
 
-int parseInput(char* userInput){
-	char _input[1000];
-        strcpy(_input, userInput); 
-	char *command = strtok(_input, " "); 
-	
-	// check if valid command, or else through a list error code 3
-		
-	return 0; 
+//parser just separates command and arguments and sends it in
+int parse(char ui[]){	
+	char tmp[200];
+	char *words[100];
+
+	int a, b, w = 0; 
+
+	for(a=0; ui[a]==' ' && a<1000; a++);
+
+	while(ui[a] != '\0' && a<1000){
+
+		for(b=0;ui[a]!='\0' && ui[a]!=' ' && a<1000;a++,b++)
+			tmp[b] = ui[a]; 
+
+		tmp[b] = '\0';
+		words[w] = strdup(tmp);
+		a++;w++;
+	}
+	 
+	return interpreter(words); 
 }
