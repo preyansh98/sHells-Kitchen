@@ -4,6 +4,7 @@
 #include "interpreter.h"
 
 int parse(char* userInput); 
+void removeNewLine(char *userInput); 
 
 void main(){
 
@@ -17,7 +18,7 @@ void main(){
 	while(1){
 		printf("%s", prompt); 
 		fgets(userInput, 999, stdin);
-		userInput[strlen(userInput)-1] = '\0';
+		removeNewLine(userInput); 
 
 		errorCode = parse(userInput); 
 		
@@ -54,4 +55,9 @@ int parse(char ui[]){
 	}
 	 
 	return interpreter(words,w); 
+}
+
+void removeNewLine(char *userInput){
+	userInput[strlen(userInput)-1] = '\0';
+	strtok(userInput, "\r");
 }
