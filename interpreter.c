@@ -44,9 +44,17 @@ int quit(char *commands[], int numargs){
 	exit(0); 
  }
 int set (char *commands[], int numargs){
-	if(numargs != 3) return 2; 
+	if(numargs < 3) return 2; 
 
-	return setVar(commands[1], commands[2]); 
+	//concatenate everything from commands[2] onwards to a new string. 
+	char buf[1000]; 
+	strcpy(buf, commands[2]); 
+
+	for(int i = 3; i<numargs; i++){
+		strcat(buf, " ");
+		strcat(buf, commands[i]); 
+	}
+	return setVar(commands[1], buf); 
  }
 
 int print(char *commands[], int numargs){

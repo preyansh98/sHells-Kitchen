@@ -18,8 +18,7 @@ int setVar(char *var, char *val){
 		char *val_dup = strdup(val); 
 		struct MEM newVar = {var_dup, val_dup}; 
 		shellMemory[memFilled++] = newVar; 	
-	} else {
-		printf("val is %d \n", idx); 
+	} else { 
 		shellMemory[idx].var = strdup(var); 
 		shellMemory[idx].value = strdup(val); 
 	}
