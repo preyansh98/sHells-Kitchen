@@ -46,8 +46,15 @@ int quit(char *commands[], int numargs){
 int set (char *commands[], int numargs){
 	if(numargs != 3) return 2; 
 
-	return 1; }
-int print(char *commands[], int numargs){return 1; }
+	return setVar(commands[1], commands[2]); 
+ }
+
+int print(char *commands[], int numargs){
+	if(numargs != 2) return 2; 
+
+	return printVar(commands[1]);	
+}
+
 
 int run(char *commands[], int numargs){
 	if(numargs != 2) return 2; 

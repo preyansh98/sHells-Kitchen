@@ -14,15 +14,11 @@ int setVar(char *var, char *val){
 	int idx= 0;
        	
 	if(findVarIdx(var, &idx) == 0) {
-		//doesn't exist
-		printf("val is %d \n", idx); 
-		
 		char *var_dup = strdup(var); 
 		char *val_dup = strdup(val); 
 		struct MEM newVar = {var_dup, val_dup}; 
 		shellMemory[memFilled++] = newVar; 	
 	} else {
-		//exists
 		printf("val is %d \n", idx); 
 		shellMemory[idx].var = strdup(var); 
 		shellMemory[idx].value = strdup(val); 
@@ -34,7 +30,6 @@ int setVar(char *var, char *val){
 int printVar(char *var){
        	int idx = 0; 
 	if(findVarIdx(var, &idx) == 0){
-		//doesn't exist
 		printf("Variable does not exist \n"); 
 	} else {
 		printf("%s \n", shellMemory[idx].value);  
