@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "shell.h"
+#include "shellmemory.h"
 
 int interpreter(char *commands[], int numargs); 
 int help(char *commands[],int numargs); 
@@ -11,8 +13,8 @@ int run(char *commands[],int numargs);
 
 int interpreter(char *commands[], int numargs){
 	
-	int errCode = 0; 
-	
+	int errCode = 0;
+      	 
 	if(strcmp(commands[0], "help") == 0) errCode = help(commands, numargs);
 	else if (strcmp(commands[0], "quit") == 0) errCode = quit(commands, numargs); 
 	else if (strcmp(commands[0], "set") == 0) errCode = set(commands, numargs); 
@@ -41,6 +43,31 @@ int quit(char *commands[], int numargs){
 	printf("Bye!\n");
 	exit(0); 
  }
-int set (char *commands[], int numargs){return 1; }
+int set (char *commands[], int numargs){
+	if(numargs != 3) return 2; 
+
+	return 1; }
 int print(char *commands[], int numargs){return 1; }
-int run(char *commands[], int numargs){return 1; }
+
+int run(char *commands[], int numargs){
+	if(numargs != 2) return 2; 
+
+	int errCode = 0; 
+	char line[1000]; 
+	FILE *p = fopen(commands[1], "rt"); 
+
+	fgets(line, 999, p); 
+	while(!feof(p)){
+		line[strlen(line) - 1] = '\0';
+		 
+		errCode = parse(line);	
+		if(errCode != 0) {
+			fclose(p); 
+			return errCode; 
+		}
+
+		fgets(line, 999, 0); 
+	}
+	fclose(p); 
+	return errCode;
+}

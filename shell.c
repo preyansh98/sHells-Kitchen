@@ -17,7 +17,7 @@ void main(){
 	while(1){
 		printf("%s", prompt); 
 		fgets(userInput, 999, stdin);
-		userInput[strlen(userInput) - 1] = '\0';
+		userInput[strlen(userInput)-1] = '\0';
 
 		errorCode = parse(userInput); 
 		
