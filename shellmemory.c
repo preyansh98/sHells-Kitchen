@@ -7,7 +7,7 @@ struct MEM shellMemory[1000];
 
 int setVar(char *var, char *val); 
 int printVar(char *var); 
-int findVarIdx(char *var); 
+int findVarIdx(char *var, int *retIdx); 
 int memFilled = 0; 
 
 int setVar(char *var, char *val){
@@ -37,7 +37,7 @@ int printVar(char *var){
 		//doesn't exist
 		printf("Variable does not exist \n"); 
 	} else {
-		printf("%s \n", shellMemory[idx].val);  
+		printf("%s \n", shellMemory[idx].value);  
 	}
 
 	return 0; 
@@ -48,11 +48,11 @@ int findVarIdx(char *var, int *retIdx){
 	if(memFilled == 0) return 0;	
 
 	for(int i = 0; i<memFilled; i++){
-		if(strcmp(shellMemory[i], var) == 0){
+		if(strcmp(shellMemory[i].var, var) == 0){
 			*retIdx = i; 
-			return true; 
+			return 1; 
 		}
 	}
 
-	return false; 
+	return 0; 
 }

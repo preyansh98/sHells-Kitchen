@@ -8,7 +8,7 @@ struct MEM {
 
 extern struct MEM shellMemory[1000]; 
 int setVar(char *var, char *val); 
-int printVar(char *var, int *retIdx); 
+int printVar(char *var); 
 
 #endif
 
