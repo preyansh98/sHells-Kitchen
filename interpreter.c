@@ -71,10 +71,14 @@ int run(char *commands[], int numargs){
 	char line[1000]; 
 	FILE *p = fopen(commands[1], "rt"); 
 
+	if(p == NULL) {
+		printf("Script not found \n");
+	}
+
 	fgets(line, 999, p); 
 	while(!feof(p)){
 		line[strlen(line) - 1] = '\0';
-		 
+		strtok(line, "\r"); 		 
 		errCode = parse(line);	
 		if(errCode != 0) {
 			fclose(p); 
