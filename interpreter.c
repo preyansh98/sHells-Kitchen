@@ -73,19 +73,17 @@ int run(char *commands[], int numargs){
 
 	if(p == NULL) {
 		printf("Script not found \n");
+		return 1;
 	}
 
-	fgets(line, 999, p); 
-	while(!feof(p)){
+	while(fgets(line, 999, p)){
 		line[strlen(line) - 1] = '\0';
 		strtok(line, "\r"); 		 
 		errCode = parse(line);	
 		if(errCode != 0) {
 			fclose(p); 
 			return errCode; 
-		}
-
-		fgets(line, 999, 0); 
+		} 
 	}
 	fclose(p); 
 	return errCode;
