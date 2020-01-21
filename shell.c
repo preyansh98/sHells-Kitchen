@@ -50,8 +50,11 @@ int parse(char ui[]){
 			tmp[b] = ui[a]; 
 
 		tmp[b] = '\0';
-		words[w] = strdup(tmp);
-		a++;w++;
+                if(strcmp(tmp, "\0") != 0 && strcmp(tmp, "") != 0 && strcmp(tmp, " ") != 0) {      
+		    words[w] = strdup(tmp);
+		    w++;
+                }
+                a++;
 	}
 	 
 	return interpreter(words,w); 

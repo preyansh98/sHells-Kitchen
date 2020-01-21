@@ -3,6 +3,8 @@
 #include <string.h>
 #include "shell.h"
 #include "shellmemory.h"
+#include <sys/time.h>
+#include <sys/resource.h>
 
 int interpreter(char *commands[], int numargs); 
 int help(char *commands[],int numargs); 
@@ -63,17 +65,19 @@ int print(char *commands[], int numargs){
 	return printVar(commands[1]);	
 }
 
-
+int num =0;
 int run(char *commands[], int numargs){
 	if(numargs != 2) return 2; 
 
 	int errCode = 0; 
 	char line[1000]; 
 	FILE *p = fopen(commands[1], "rt"); 
-
+        num ++;
 	if(p == NULL) {
-		printf("Script not found \n");
-		return 1;
+		struct rlimit lim;
+            getrlimit(RLIMIT_NOFILE, &lim);
+            printf("Script not found%d  %d\n",num, lim.rlim_cur);
+            return 1;
 	}
 
 	while(fgets(line, 999, p)){
