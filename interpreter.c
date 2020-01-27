@@ -65,18 +65,14 @@ int print(char *commands[], int numargs){
 	return printVar(commands[1]);	
 }
 
-int num =0;
 int run(char *commands[], int numargs){
 	if(numargs != 2) return 2; 
 
 	int errCode = 0; 
 	char line[1000]; 
 	FILE *p = fopen(commands[1], "rt"); 
-        num ++;
-	if(p == NULL) {
-		struct rlimit lim;
-            getrlimit(RLIMIT_NOFILE, &lim);
-            printf("Script not found%d  %d\n",num, lim.rlim_cur);
+    	if(p == NULL) {
+            printf("Script not found \n");
             return 1;
 	}
 
