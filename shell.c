@@ -12,7 +12,7 @@ void main(){
 	char userInput[1000];
 	int errorCode = 0; 
 
-	printf("Welcome to the Preyansh shell! \n");
+	printf("Welcome to the Preyansh Kaushik shell! \n");
 	printf("Version 1.0 Created January 2020 \n"); 
 
 	while(1){

@@ -1,13 +1,7 @@
 help
-set x 10
-set y 20
-set z mary
-set bobbie Montreal Canadians
-set z bob
-set y 30
-print x
-print y
-print z
-print bobbie
-run testfile.txt
+set x 2
+set             y                 10
+                print y
+    print x                      
+run testfile2.txt
 quit

@@ -1,0 +1,2 @@
+set t2 This is running from testfile2.txt
+print t2
