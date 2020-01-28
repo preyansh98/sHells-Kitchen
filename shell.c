@@ -19,6 +19,8 @@ void main(){
 		printf("%s", prompt); 
 		fgets(userInput, 999, stdin);
 		removeNewLine(userInput); 
+                
+                if(strlen(userInput) == 0) continue; 
 
 		errorCode = parse(userInput); 
 		
@@ -61,6 +63,7 @@ int parse(char ui[]){
 }
 
 void removeNewLine(char *userInput){
-	userInput[strlen(userInput)-1] = '\0';
+	if(strlen(userInput) == 0) return;
+        userInput[strlen(userInput)-1] = '\0';
 	strtok(userInput, "\r");
 }
