@@ -43,7 +43,7 @@ int quit(char *commands[], int numargs){
 	if(numargs > 1) return 2; 
 
 	printf("Bye!\n");
-	exit(0); 
+	return -1; 
  }
 int set (char *commands[], int numargs){
 	if(numargs < 3) return 2; 
@@ -82,7 +82,8 @@ int run(char *commands[], int numargs){
 		errCode = parse(line);	
 		if(errCode != 0) {
 			fclose(p); 
-			return errCode; 
+			if(errCode == -1) return 0; 
+                        else return errCode; 
 		} 
 	}
 	fclose(p); 

@@ -2,6 +2,7 @@ help
 set x 2
 set             y                 10
                 print y
+quit
     print x                      
 run testfile2.txt
-quit
+
